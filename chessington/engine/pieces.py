@@ -36,15 +36,24 @@ class Pawn(Piece):
     """
 
     def get_available_moves(self, board):
+        available_moves = []
         if self.player == Player.WHITE:
             current_square: Square = board.find_piece(self)
             next_square = Square.at(current_square.row + 1, current_square.col)
-            return [ next_square ]
+            available_moves.append(next_square)
+            if (current_square.row == 1):
+                following_square = Square.at(current_square.row + 2, current_square.col)
+                available_moves.append(following_square)
+                
         else:
             current_square: Square = board.find_piece(self)
             next_square = Square.at(current_square.row - 1, current_square.col)
-            return [ next_square ]
-        return []
+            available_moves.append(next_square)
+            if (current_square.row == 6):
+                following_square = Square.at(current_square.row - 2, current_square.col)
+                available_moves.append(following_square)
+
+        return available_moves
 
 
 class Knight(Piece):
