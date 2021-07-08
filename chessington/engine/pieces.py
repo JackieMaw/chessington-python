@@ -38,23 +38,25 @@ class Pawn(Piece):
         available_moves = []
         if self.player == Player.WHITE:
             current_square: Square = board.find_piece(self)
-            next_square = Square.at(current_square.row + 1, current_square.col)
-            if (board.get_piece(next_square) == None):
-                available_moves.append(next_square)
-            if (current_square.row == 1):
-                following_square = Square.at(current_square.row + 2, current_square.col)
-                if (board.get_piece(next_square) == None) and (board.get_piece(following_square) == None):
-                    available_moves.append(following_square)
+            if (current_square.row < 7):
+                next_square = Square.at(current_square.row + 1, current_square.col)
+                if (board.get_piece(next_square) == None):
+                    available_moves.append(next_square)
+                if (current_square.row == 1):
+                    following_square = Square.at(current_square.row + 2, current_square.col)
+                    if (board.get_piece(next_square) == None) and (board.get_piece(following_square) == None):
+                        available_moves.append(following_square)
                 
         else:
             current_square: Square = board.find_piece(self)
-            next_square = Square.at(current_square.row - 1, current_square.col)
-            if (board.get_piece(next_square) == None):
-                available_moves.append(next_square)
-            if (current_square.row == 6):
-                following_square = Square.at(current_square.row - 2, current_square.col)
-                if (board.get_piece(next_square) == None) and (board.get_piece(following_square) == None):
-                    available_moves.append(following_square)
+            if (current_square.row > 0):
+                next_square = Square.at(current_square.row - 1, current_square.col)
+                if (board.get_piece(next_square) == None):
+                    available_moves.append(next_square)
+                if (current_square.row == 6):
+                    following_square = Square.at(current_square.row - 2, current_square.col)
+                    if (board.get_piece(next_square) == None) and (board.get_piece(following_square) == None):
+                        available_moves.append(following_square)
 
         return available_moves
 
