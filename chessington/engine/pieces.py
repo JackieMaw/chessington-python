@@ -5,6 +5,7 @@ Definitions of each of the different chess pieces.
 from abc import ABC, abstractmethod
 
 from chessington.engine.data import Player, Square
+#from chessington.engine import Board
 
 class Piece(ABC):
     """
@@ -35,6 +36,14 @@ class Pawn(Piece):
     """
 
     def get_available_moves(self, board):
+        if self.player == Player.WHITE:
+            current_square: Square = board.find_piece(self)
+            next_square = Square.at(current_square.row + 1, current_square.col)
+            return [ next_square ]
+        else:
+            current_square: Square = board.find_piece(self)
+            next_square = Square.at(current_square.row - 1, current_square.col)
+            return [ next_square ]
         return []
 
 
